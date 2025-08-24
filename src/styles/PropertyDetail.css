@@ -1,0 +1,156 @@
+/* PropertyDetail.css */
+.property-detail {
+  font-family: "Poppins", sans-serif;
+  color: #333;
+}
+
+/* Hero Image */
+.property-hero {
+  width: 100%;
+  height: 70vh;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.property-hero-overlay {
+  background: rgba(0, 0, 0, 0.45);
+  color: white;
+  padding: 20px 40px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.property-hero-overlay h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.property-hero-overlay .location {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+  opacity: 0.85;
+}
+
+.property-hero-overlay .price {
+  font-size: 1.8rem;
+  color: #00b4d8;
+}
+
+/* Property Details */
+.property-detail-section {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.property-detail-card {
+  background: #fdfdfd;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.property-detail-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+}
+
+.property-detail-card h2 {
+  margin-bottom: 15px;
+  font-size: 1.8rem;
+  color: #023e8a;
+}
+
+.property-detail-card p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  color: #444;
+}
+
+.property-features {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-bottom: 25px;
+}
+
+.property-features li {
+  background: #e0f7fa;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-weight: 500;
+  color: #0077b6;
+  min-width: 120px; /* Ensure uniform width for all feature items */
+  text-align: center;
+}
+
+/* Buttons */
+.btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.fav-btn,
+.back-btn {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: 0.3s ease;
+}
+
+.fav-btn {
+  background: #ff6b6b;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.fav-btn:hover {
+  background: #e63946;
+}
+
+.back-btn {
+  background: #0077b6;
+  color: white;
+}
+
+.back-btn:hover {
+  background: #023e8a;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .property-features {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+  .property-hero-overlay h1 {
+    font-size: 1.8rem;
+  }
+
+  .property-hero-overlay .price {
+    font-size: 1.4rem;
+  }
+
+  .property-features {
+    flex-direction: column;
+    gap: 10px;
+  }
+

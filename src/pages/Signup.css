@@ -1,0 +1,80 @@
+/* Signup Page Styling */
+.signup-container {
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #0077b6, #caf0f8);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.signup-box {
+  background: #fffaf0; /* soft cream */
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  width: 380px;
+  text-align: center;
+}
+
+.signup-box h2 {
+  margin-bottom: 1.5rem;
+  color: #0077b6;
+  font-size: 1.8rem;
+}
+
+.signup-box input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 1rem;
+  outline: none;
+  transition: 0.3s;
+}
+
+.signup-box input:focus {
+  border-color: #0077b6;
+  box-shadow: 0 0 5px rgba(0, 119, 182, 0.3);
+}
+
+.signup-box button {
+  width: 100%;
+  padding: 12px;
+  background: #0077b6;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: 0.3s;
+}
+
+.signup-box button:hover {
+  background: #005f8c;
+}
+
+.error-message {
+  color: red;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.login-link {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.login-link span {
+  color: #0077b6;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.login-link span:hover {
+  text-decoration: underline;
+}

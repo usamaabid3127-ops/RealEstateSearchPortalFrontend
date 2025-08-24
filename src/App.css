@@ -1,0 +1,8 @@
+/* App.css - Minimal Global Styles */
+body {
+  min-height: 100vh;
+  background: #f9f9f9; /* light neutral background */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+}
