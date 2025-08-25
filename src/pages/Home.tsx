@@ -132,13 +132,11 @@ const Home: React.FC = () => {
   const navigate = useNavigate();
   const [favorites, setFavorites] = useState<number[]>([]);
 
-  // Initialize favorites from localStorage
   useEffect(() => {
     const savedFavorites = JSON.parse(localStorage.getItem("favorites") || "[]");
     setFavorites(savedFavorites);
   }, []);
-
-  // Toggle favorite and persist in localStorage
+  
   const toggleFavorite = (id: number) => {
     setFavorites((prev) => {
       const updated = prev.includes(id) ? prev.filter((favId) => favId !== id) : [...prev, id];
