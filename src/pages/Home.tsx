@@ -1,11 +1,22 @@
-
-
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import "../styles/Home.css";
 import { useNavigate } from "react-router-dom";
 
-const properties = [
+interface Property {
+  id: number;
+  title: string;
+  location: string;
+  price: string;
+  image: string;
+  area: string;
+  bedrooms: number;
+  bathrooms: number;
+  garage: string;
+  contact: string;
+}
+
+const properties: Property[] = [
   {
     id: 1,
     title: "Luxury Villa in Karachi",
@@ -130,16 +141,26 @@ const properties = [
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
-  const [favorites, setFavorites] = useState<number[]>([]);
+  const [favorites, setFavorites] = useState<Property[]>([]);
 
+  // Initialize favorites from localStorage
   useEffect(() => {
-    const savedFavorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+    const savedFavorites: Property[] = JSON.parse(
+      localStorage.getItem("favorites") || "[]"
+    );
     setFavorites(savedFavorites);
   }, []);
-  
-  const toggleFavorite = (id: number) => {
+
+  // Toggle favorite and persist in localStorage
+  const toggleFavorite = (property: Property) => {
     setFavorites((prev) => {
-      const updated = prev.includes(id) ? prev.filter((favId) => favId !== id) : [...prev, id];
+      const exists = prev.find((fav) => fav.id === property.id);
+      let updated: Property[];
+      if (exists) {
+        updated = prev.filter((fav) => fav.id !== property.id);
+      } else {
+        updated = [...prev, property];
+      }
       localStorage.setItem("favorites", JSON.stringify(updated));
       return updated;
     });
@@ -156,7 +177,10 @@ const Home: React.FC = () => {
           <h1>Find Your Dream Home</h1>
           <p>Search from thousands of properties across Pakistan</p>
           <div className="search-bar">
-            <input type="text" placeholder="Search by city, location, or property..." />
+            <input
+              type="text"
+              placeholder="Search by city, location, or property..."
+            />
             <button>Search</button>
           </div>
         </div>
@@ -166,29 +190,32 @@ const Home: React.FC = () => {
       <section className="property-section">
         <h2 className="section-title">Featured Properties</h2>
         <div className="property-grid">
-          {properties.map((property) => (
-            <div key={property.id} className="property-card">
-              <img
-                src={property.image}
-                alt={property.title}
-                onClick={() =>
-                  navigate(`/property/${property.id}`, { state: property })
-                }
-                style={{ cursor: "pointer" }}
-              />
-              <div className="property-info">
-                <h3>{property.title}</h3>
-                <p>{property.location}</p>
-                <span>{property.price}</span>
+          {properties.map((property) => {
+            const isFav = favorites.some((fav) => fav.id === property.id);
+            return (
+              <div key={property.id} className="property-card">
+                <img
+                  src={property.image}
+                  alt={property.title}
+                  onClick={() =>
+                    navigate(`/property/${property.id}`, { state: property })
+                  }
+                  style={{ cursor: "pointer" }}
+                />
+                <div className="property-info">
+                  <h3>{property.title}</h3>
+                  <p>{property.location}</p>
+                  <span>{property.price}</span>
+                </div>
+                <button
+                  className="favorite-btn"
+                  onClick={() => toggleFavorite(property)}
+                >
+                  {isFav ? "❤️ Remove" : "🤍 Add to Favorites"}
+                </button>
               </div>
-              <button
-                className="favorite-btn"
-                onClick={() => toggleFavorite(property.id)}
-              >
-                {favorites.includes(property.id) ? "❤️ Remove" : "🤍 Add to Favorites"}
-              </button>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 
@@ -201,7 +228,9 @@ const Home: React.FC = () => {
 
       {/* Footer */}
       <footer className="footer">
-        <p>© {new Date().getFullYear()} Real Estate App. All rights reserved.</p>
+        <p>
+          © {new Date().getFullYear()} Real Estate App. All rights reserved.
+        </p>
       </footer>
     </div>
   );
