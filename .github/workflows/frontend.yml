@@ -1,0 +1,43 @@
+name: Frontend - build and deploy
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  AWS_REGION: us-east-1
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install and build the website
+        run: |
+          npm ci
+          npm run build
+
+      - name: Log in to AWS (no stored keys)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::656446902115:role/re-gha-frontend
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Upload to S3
+        run: aws s3 sync dist s3://re-frontend-656446902115 --delete
+
+      - name: Refresh CloudFront
+        run: aws cloudfront create-invalidation --distribution-id EWFA2A1N429VN --paths "/*"
